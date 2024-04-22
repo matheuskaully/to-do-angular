@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { NgClass } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
 
+
 @Component({
   selector: 'app-to-do-list',
   standalone: true,
@@ -19,38 +20,37 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './to-do-list.component.scss'
 })
 export class ToDoListComponent implements DoCheck {
-  toastr = inject(ToastrService)
-  public taskList: Array<TaskList> = []
+  toastr = inject(ToastrService);
+  public taskList: Array<TaskList> = [];
 
-   constructor() {
+  constructor() {
+  }
 
-   }
+  ngDoCheck() {
+    this.taskList.sort((first, last) => Number(first.checked) - Number(last.checked));
+  }
 
-   ngDoCheck() {
-    this.taskList.sort((first, last) =>  Number(first.checked) - Number(last.checked))
-   }
-
-   public deleteItemTaskList(event: number) {
-    this.taskList.splice(event, 1)
+  public deleteItemTaskList(event: number) {
+    this.taskList.splice(event, 1);
     this.toastr.success(
       'Você removeu uma nova tarefa em sua lista de tarefas.',
       'Tarefa removida!', {
       progressBar: true,
       progressAnimation: 'decreasing'
-    })
-   }
+    });
+  }
 
-   public deleteAllTaskList() {
+  public deleteAllTaskList() {
     this.toastr.warning(
       'Você irá remover todas tarefas',
       'Cuidado!', {
       progressBar: true,
       progressAnimation: 'decreasing'
-    })
+    });
 
-    const confirm = window.confirm('Você deseja realmente deletar todas as tasks?')
+    const confirm = window.confirm('Você deseja realmente deletar todas as tasks?');
     if (confirm) {
-      this.taskList = []
+      this.taskList = [];
     }
 
     this.toastr.success(
@@ -59,24 +59,24 @@ export class ToDoListComponent implements DoCheck {
       progressBar: true,
       progressAnimation: 'decreasing'
     }
-    )
-   }
+    );
+  }
 
-   public setEmitTaskList(event: string) {
+  public setEmitTaskList(event: string) {
     this.taskList.push({
       task: event,
       checked: false
-    })
-   }
+    });
+  }
 
-   public validationinput(event: string, index: number) {
+  public validationinput(event: string, index: number) {
     if (!event.length) {
-      const confirm = window.confirm('A tarefa está vazia, deseja deletar?')
+      const confirm = window.confirm('A tarefa está vazia, deseja deletar?');
 
       if (confirm) {
-        this.deleteItemTaskList(index)
+        this.deleteItemTaskList(index);
       }
     }
-   }
+  }
 
 }

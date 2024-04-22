@@ -1,1 +1,8 @@
-<p>to-do-input-add-items works!</p>
+<div class="p-4 w-full border-zinc-800 border rounded-xl mt-4 from-purple-500 to-purple-700 bg-gradient-to-tr text-white">
+  <input
+    [(ngModel)]="addItemTaskList"
+    (keyup.enter)="submitItemTaskList()"
+    type="text"
+    placeholder="Digite sua nova tarefa aqui..."
+    class="bg-transparent w-full placeholder:text-white placeholder:text-sm focus:outline-none">
+</div>

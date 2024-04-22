@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ToDoListComponent } from './to-do-list.component';
+import { ToDoListComponent } from './ToDoListComponent';
 
 describe('ToDoListComponent', () => {
   let component: ToDoListComponent;
@@ -11,7 +11,7 @@ describe('ToDoListComponent', () => {
       imports: [ToDoListComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(ToDoListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
