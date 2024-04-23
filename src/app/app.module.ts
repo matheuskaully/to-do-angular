@@ -12,6 +12,7 @@ import { RouterModule, RouterOutlet } from '@angular/router';
     RouterOutlet,
     HomeModule,
     RouterModule,
+    
   ],
   bootstrap: [
   ]

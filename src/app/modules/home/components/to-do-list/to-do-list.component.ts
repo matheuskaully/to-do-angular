@@ -20,14 +20,16 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ToDoListComponent implements DoCheck {
   toastr = inject(ToastrService)
-  public taskList: Array<TaskList> = []
+  public taskList: Array<TaskList> = JSON.parse(localStorage.getItem("list") || '[]')
 
    constructor() {
 
    }
 
    ngDoCheck() {
-    this.taskList.sort((first, last) =>  Number(first.checked) - Number(last.checked))
+    if (this.taskList) {
+      this.setLocalStorage()
+    }
    }
 
    public deleteItemTaskList(event: number) {
@@ -79,4 +81,9 @@ export class ToDoListComponent implements DoCheck {
     }
    }
 
+   public setLocalStorage() {
+    if (this.taskList) {
+      localStorage.setItem('list', JSON.stringify(this.taskList))
+    }
+   }
 }
